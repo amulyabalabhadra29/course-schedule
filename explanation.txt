@@ -1,0 +1,25 @@
+Input Format:
+
+First line as a single integer representing the number of courses n
+Second line as a single integer representing the number of pairs representing prerequisites as q
+Following q lines consists of pair of two numbers x, y where x is a prerequisite course of y that means x needs to be completed before y
+
+Note: if n is the number of courses the number for a course can be 0 <= courseNumber < n
+
+Logic:
+
+This approach is based on the topological sort. The topological sorting will be the order that we get based on the in-degrees of the nodes. If we remove the outgoing edges for a node/course when it is completed, we can find out the nodes/courses that should be processed, they next will be again with 0 in-degree while removing the edges. We can continuously do this until all the courses have processed.
+
+Algorithm:
+
+1. Initialize a queue, Q to keep a track of all the nodes in the graph with 0 in-degree.
+2. Iterate over all the edges in the input and create an adjacency list of node v/s in-degree.
+3. Add all the nodes with 0 in-degree to Q.
+4. The following steps are to be done until the Q becomes empty.
+   i. Pop a node from the Q. Let's call this node, N.
+   ii. For all the neighbors of this node, N, reduce their in-degree by 1. If any of the node's in-degree reaches 0, add it to the Q.
+   iii.Add the node N to the list maintaining topologically sorted order.
+   iv. Continue step 4.
+
+Note:
+As this approach requires a queue, it is not fixed as we can also use a stack but if returns a different order of the schedule but is also gives the required correct order as there can be multiple outcomes of order for a same schedule. So for using in python, we can use a stack which is a normal list in python.
